@@ -48,5 +48,5 @@ export class User {
     type: "text",
     nullable: true,
   })
-  refreshToken!: string;
+  refresh_token!: string;
 }

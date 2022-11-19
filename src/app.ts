@@ -4,6 +4,8 @@ import { Application } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
+
 import routes from "./routes";
 import { AppDataSource } from "./config/database.config";
 import { errorHandler, notFoundError } from "./middlewares/errorHandler";
@@ -21,8 +23,11 @@ const start = async () => {
 
     const app: Application = express();
     // const whiteList = ["http://localhost:3005"];
+
     // logger
     app.use(morgan("dev"));
+
+    // cors
     app.use(
       cors()
       //   {
@@ -36,7 +41,11 @@ const start = async () => {
       //   optionsSuccessStatus: 200,
       // }
     );
+
+    // parses json body
     app.use(express.json());
+
+    app.use(cookieParser());
 
     // route handler
     app.use("/api/v1", routes);
